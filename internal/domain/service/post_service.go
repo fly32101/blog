@@ -55,6 +55,22 @@ func (s *PostService) UpdatePost(id uint, title, content string) (*entity.Post, 
 	return post, nil
 }
 
+// IncrementViewCount 增加文章阅读量
+func (s *PostService) IncrementViewCount(id uint) error {
+	post, err := s.postRepo.GetByID(id)
+	if err != nil {
+		return err
+	}
+
+	post.ViewCount++
+	err = s.postRepo.Update(post)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // DeletePost 删除文章
 func (s *PostService) DeletePost(id uint) error {
 	return s.postRepo.Delete(id)

@@ -47,6 +47,13 @@ func (a *PostApp) GetPostByID(id uint) (*dto.PostDetailResponse, error) {
 		return nil, err
 	}
 
+	// 增加阅读量
+	err = a.postService.IncrementViewCount(id)
+	if err != nil {
+		return nil, err
+	}
+	post.ViewCount++
+
 	// 获取文章分类
 	categories, err := a.categoryService.GetCategoriesByPostID(id)
 	if err != nil {
@@ -58,6 +65,7 @@ func (a *PostApp) GetPostByID(id uint) (*dto.PostDetailResponse, error) {
 		Title:      post.Title,
 		Content:    post.Content,
 		Author:     post.Author,
+		ViewCount:  post.ViewCount,
 		CreatedAt:  post.CreatedAt,
 		UpdatedAt:  post.UpdatedAt,
 		Categories: convertToCategoryResponses(categories),

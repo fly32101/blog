@@ -14,12 +14,13 @@ type Router struct {
 
 // NewRouter 创建路由器
 func NewRouter(
+	engine *gin.Engine,
 	postHandler *PostHandler,
 	commentHandler *CommentHandler,
 	categoryHandler *CategoryHandler,
 ) *Router {
 	return &Router{
-		engine:          gin.Default(),
+		engine:          engine,
 		postHandler:     postHandler,
 		commentHandler:  commentHandler,
 		categoryHandler: categoryHandler,

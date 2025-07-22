@@ -10,6 +10,7 @@ type Post struct {
 	Title     string    `json:"title"`
 	Content   string    `json:"content"`
 	Author    string    `json:"author"`
+	ViewCount uint      `json:"view_count"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -21,6 +22,7 @@ func NewPost(title, content, author string) *Post {
 		Title:     title,
 		Content:   content,
 		Author:    author,
+		ViewCount: 0,
 		CreatedAt: now,
 		UpdatedAt: now,
 	}

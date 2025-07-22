@@ -63,7 +63,7 @@ func main() {
 	engine.Use(middleware.CORS())
 
 	// 注册路由
-	router := api.NewRouter(postHandler, commentHandler, categoryHandler)
+	router := api.NewRouter(engine, postHandler, commentHandler, categoryHandler)
 	router.SetupRoutes()
 
 	// 启动服务器

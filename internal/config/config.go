@@ -30,11 +30,11 @@ func NewConfig() *Config {
 		},
 		Database: DatabaseConfig{
 			Driver:   "mysql",
-			Host:     "", // 使用本地数据库
-			Port:     "",
-			Username: "",
-			Password: "", // 无密码
-			DBName:   "",
+			Host:     "192.168.1.11", // 使用本地数据库
+			Port:     "3306",
+			Username: "knandlkb_test",
+			Password: "KnB8LFM?#6nT", // 无密码
+			DBName:   "a",
 			Charset:  "utf8mb4",
 		},
 	}

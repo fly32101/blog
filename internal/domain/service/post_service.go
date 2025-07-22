@@ -20,8 +20,8 @@ func NewPostService(postRepo repository.PostRepository, categoryRepo repository.
 }
 
 // CreatePost 创建文章
-func (s *PostService) CreatePost(title, content, author string) (*entity.Post, error) {
-	post := entity.NewPost(title, content, author)
+func (s *PostService) CreatePost(title, content, author, titleURL string) (*entity.Post, error) {
+	post := entity.NewPost(title, content, author, titleURL)
 	err := s.postRepo.Create(post)
 	if err != nil {
 		return nil, err
@@ -40,13 +40,13 @@ func (s *PostService) GetAllPosts() ([]*entity.Post, error) {
 }
 
 // UpdatePost 更新文章
-func (s *PostService) UpdatePost(id uint, title, content string) (*entity.Post, error) {
+func (s *PostService) UpdatePost(id uint, title, content, titleURL string) (*entity.Post, error) {
 	post, err := s.postRepo.GetByID(id)
 	if err != nil {
 		return nil, err
 	}
 
-	post.Update(title, content)
+	post.Update(title, content, titleURL)
 	err = s.postRepo.Update(post)
 	if err != nil {
 		return nil, err

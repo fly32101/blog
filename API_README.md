@@ -31,6 +31,7 @@
   "title": "文章标题",
   "content": "文章内容",
   "author": "作者名称",
+  "title_url": "https://example.com/image.jpg",  // 可选，文章头图URL
   "category_ids": [1, 2]  // 可选，文章所属分类ID数组
 }
 ```
@@ -42,6 +43,8 @@
     "id": 1,
     "title": "文章标题",
     "author": "作者名称",
+    "title_url": "https://example.com/image.jpg",
+    "view_count": 0,
     "created_at": "2023-07-15T13:45:30Z",
     "updated_at": "2023-07-15T13:45:30Z"
   },
@@ -62,6 +65,8 @@
       "id": 1,
       "title": "文章标题1",
       "author": "作者1",
+      "title_url": "https://example.com/image1.jpg",
+      "view_count": 15,
       "created_at": "2023-07-15T13:45:30Z",
       "updated_at": "2023-07-15T13:45:30Z"
     },
@@ -69,6 +74,8 @@
       "id": 2,
       "title": "文章标题2",
       "author": "作者2",
+      "title_url": "https://example.com/image2.jpg",
+      "view_count": 8,
       "created_at": "2023-07-15T14:12:22Z",
       "updated_at": "2023-07-15T14:12:22Z"
     }
@@ -90,6 +97,8 @@
     "title": "文章标题",
     "content": "文章内容",
     "author": "作者名称",
+    "title_url": "https://example.com/image.jpg",
+    "view_count": 10,
     "created_at": "2023-07-15T13:45:30Z",
     "updated_at": "2023-07-15T13:45:30Z",
     "categories": [
@@ -121,7 +130,8 @@
 ```json
 {
   "title": "更新后的标题",
-  "content": "更新后的内容"
+  "content": "更新后的内容",
+  "title_url": "https://example.com/new-image.jpg"  // 可选，更新后的头图URL
 }
 ```
 - **成功响应** (200 OK):
@@ -132,6 +142,8 @@
     "id": 1,
     "title": "更新后的标题",
     "author": "作者名称",
+    "title_url": "https://example.com/new-image.jpg",
+    "view_count": 5,
     "created_at": "2023-07-15T13:45:30Z",
     "updated_at": "2023-07-15T15:30:45Z"
   },
@@ -165,6 +177,8 @@
       "id": 1,
       "title": "文章标题1",
       "author": "作者1",
+      "title_url": "https://example.com/image1.jpg",
+      "view_count": 15,
       "created_at": "2023-07-15T13:45:30Z",
       "updated_at": "2023-07-15T13:45:30Z"
     },
@@ -172,6 +186,8 @@
       "id": 3,
       "title": "文章标题3",
       "author": "作者3",
+      "title_url": "https://example.com/image3.jpg",
+      "view_count": 3,
       "created_at": "2023-07-15T16:22:10Z",
       "updated_at": "2023-07-15T16:22:10Z"
     }
@@ -384,7 +400,7 @@ curl -X POST http://localhost:8080/api/categories -H "Content-Type: application/
 
 ### 创建文章
 ```bash
-curl -X POST http://localhost:8080/api/posts -H "Content-Type: application/json" -d '{"title":"Go语言入门","content":"这是一篇Go语言入门文章","author":"张三","category_ids":[1]}'
+curl -X POST http://localhost:8080/api/posts -H "Content-Type: application/json" -d '{"title":"Go语言入门","content":"这是一篇Go语言入门文章","author":"张三","title_url":"https://example.com/go-tutorial.jpg","category_ids":[1]}'
 ```
 
 ### 获取所有文章
@@ -395,6 +411,11 @@ curl http://localhost:8080/api/posts
 ### 获取特定文章
 ```bash
 curl http://localhost:8080/api/posts/1
+```
+
+### 更新文章
+```bash
+curl -X PUT http://localhost:8080/api/posts/1 -H "Content-Type: application/json" -d '{"title":"Go语言进阶","content":"这是一篇Go语言进阶文章","title_url":"https://example.com/go-advanced.jpg"}'
 ```
 
 ### 为文章添加评论

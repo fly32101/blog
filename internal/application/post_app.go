@@ -22,7 +22,7 @@ func NewPostApp(postService *service.PostService, categoryService *service.Categ
 
 // CreatePost 创建文章
 func (a *PostApp) CreatePost(req *dto.CreatePostRequest) (*dto.PostResponse, error) {
-	post, err := a.postService.CreatePost(req.Title, req.Content, req.Author)
+	post, err := a.postService.CreatePost(req.Title, req.Content, req.Author, req.TitleURL)
 	if err != nil {
 		return nil, err
 	}
@@ -65,6 +65,7 @@ func (a *PostApp) GetPostByID(id uint) (*dto.PostDetailResponse, error) {
 		Title:      post.Title,
 		Content:    post.Content,
 		Author:     post.Author,
+		TitleURL:   post.TitleURL,
 		ViewCount:  post.ViewCount,
 		CreatedAt:  post.CreatedAt,
 		UpdatedAt:  post.UpdatedAt,
@@ -89,7 +90,7 @@ func (a *PostApp) GetAllPosts() ([]*dto.PostResponse, error) {
 
 // UpdatePost 更新文章
 func (a *PostApp) UpdatePost(id uint, req *dto.UpdatePostRequest) (*dto.PostResponse, error) {
-	post, err := a.postService.UpdatePost(id, req.Title, req.Content)
+	post, err := a.postService.UpdatePost(id, req.Title, req.Content, req.TitleURL)
 	if err != nil {
 		return nil, err
 	}
@@ -123,6 +124,8 @@ func convertToPostResponse(post *entity.Post) *dto.PostResponse {
 		ID:        post.ID,
 		Title:     post.Title,
 		Author:    post.Author,
+		TitleURL:  post.TitleURL,
+		ViewCount: post.ViewCount,
 		CreatedAt: post.CreatedAt,
 		UpdatedAt: post.UpdatedAt,
 	}
